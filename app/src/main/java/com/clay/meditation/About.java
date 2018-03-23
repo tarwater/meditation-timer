@@ -29,7 +29,7 @@ public class About extends AppCompatActivity {
 
         String howTo = "This app was designed and programmed by Clay Holt \n\n" +
                 "I hope you enjoy it! \n\n" +
-                "Please visit my website at: \n ";
+                "If you'd like to say thanks, you may donate to me via Paypal at clayholt@gmx.com";
 
         textView.setText(howTo);
 
