@@ -12,7 +12,7 @@
     <string name="link"><a href="http://www.clayholt.com">http://www.clayholt.com</a></string>
     <string name="statsLabel">Total meditation time: </string>
     <string name="statsResetButtonLabel">Reset</string>
-    <string name="notificationToggleLabel">Notifications: </string>
+    <string name="notificationToggleLabel">Daily reminder: </string>
     <string name="toggleOn">Y</string>
     <string name="toggleOff">N</string>
 

@@ -27,9 +27,8 @@ public class About extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.aboutTextView);
 
-        String howTo = "This app was designed and programmed by Clay Holt \n\n" +
-                "I hope you enjoy it! \n\n" +
-                "If you'd like to say thanks, you may donate to me via Paypal at clayholt@gmx.com";
+        String howTo = "I hope you enjoy this app! \n\n" +
+                "If you'd like to say thanks, you may donate to me via Paypal at clayholt@gmx.com\n\n";
 
         textView.setText(howTo);
 
