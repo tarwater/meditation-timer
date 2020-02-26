@@ -4,18 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.ToggleButton;
 
 public class Settings extends AppCompatActivity {
 
@@ -35,25 +31,17 @@ public class Settings extends AppCompatActivity {
 
         Switch mySwitch = (Switch) findViewById(R.id.switch1);
 
-        if(notificationsOn){
-            mySwitch.setChecked(true);
-        } else {
-            mySwitch.setChecked(false);
-        }
+        mySwitch.setChecked(notificationsOn);
 
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    settings.edit().putBoolean("notifications", true).apply();
-                } else {
-                    settings.edit().putBoolean("notifications", false).apply();
-                }
+                settings.edit().putBoolean("notifications", isChecked).apply();
             }
         });
 
         //Spinner stuff
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.session_array, android.R.layout.simple_spinner_item);
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.session_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 

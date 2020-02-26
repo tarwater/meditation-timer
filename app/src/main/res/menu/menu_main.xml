@@ -21,10 +21,4 @@
         android:title="@string/howTo"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/about"
-        android:orderInCategory="400"
-        android:title="@string/about"
-        app:showAsAction="never" />
-
 </menu>

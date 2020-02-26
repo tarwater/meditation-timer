@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/meditation-timer.iml" filepath="$PROJECT_DIR$/meditation-timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/meditation-timer-app.iml" filepath="$PROJECT_DIR$/app/meditation-timer-app.iml" group="meditation-timer/app" />
+      <module fileurl="file://$PROJECT_DIR$/myStuff-meditation-timer.iml" filepath="$PROJECT_DIR$/myStuff-meditation-timer.iml" group="meditation-timer" />
     </modules>
   </component>
 </project>

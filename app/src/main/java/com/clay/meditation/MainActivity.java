@@ -33,7 +33,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
     Button startButton;
     Button resetButton;
     Button pauseButton;
@@ -107,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         }
         timeTextView.setText(value);
         msToMed = minutes * 60 * 1000;
-
     }
 
     public void updateTimeWithSeconds(int seconds) {
@@ -168,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         settings = this.getSharedPreferences("com.clay.meditation", Context.MODE_PRIVATE);
 
@@ -305,10 +303,6 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), HowTo.class);
             startActivity(i);
             return true;
-        } else if (id == R.id.about) {
-            Intent i = new Intent(getApplicationContext(), About.class);
-            startActivity(i);
-            return true;
         } else if (id == R.id.stats) {
             Intent i = new Intent(getApplicationContext(), Stats.class);
             startActivity(i);
@@ -323,13 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
         Uri alarmSound = Uri.parse("android.resource://com.clay.meditation/" + R.raw.bell2);
 
-        int level = Math.round(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) * 0.7f);
-
-        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, level, 0);
-
-
         try {
-
             if(!mp.isPlaying()){
                 mp.setDataSource(getApplicationContext(), alarmSound);
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -342,18 +330,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-
-
-        } catch (IOException e) {
-
-
-        }
+        } catch (IOException ignored) {}
 
     }
 
     public void stopSound(){
-// reset the volume to what it was before we changed it.
-        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, userVolume, 0);
         mp.stop();
         mp.reset();
     }

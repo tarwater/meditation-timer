@@ -25,6 +25,8 @@
         <item>25 mins</item>
         <item>30 mins</item>
         <item>40 mins</item>
+        <item>50 mins</item>
+        <item>60 mins</item>
 
     </string-array>
     <string name="title_activity_how_to">HowTo</string>
