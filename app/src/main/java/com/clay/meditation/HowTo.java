@@ -29,7 +29,7 @@ public class HowTo extends AppCompatActivity {
                 "2. Close your eyes (or don't) and breathe through your nose. \n\n" +
                 "3. Try to keep your attention on the breath sensations in the body. Notice how it feels as it moves in and out. \n\n" +
                 "4. Let all other thoughts and feelings pass by. Try not to grasp or judge them. \n\n" +
-                "5. Don't worry! There is no wrong way. ";
+                "5. Don't worry! You're doing it right. :) ";
 
         textView.setText(howTo);
 

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     AudioManager mAudioManager;
     int userVolume;
+    boolean isHardcoreMode;
 
     public void start(View view) {
 
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         settings = this.getSharedPreferences("com.clay.meditation", Context.MODE_PRIVATE);
-        boolean isHardcoreMode = settings.getBoolean("hardcore", false);
+        isHardcoreMode = settings.getBoolean("hardcore", false);
 
         int defaultMedTime = settings.getInt("defaultMedTime", 10);
 
@@ -190,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
         resetButton.setTypeface(quicksand);
 
         seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setMax(3540);
-        seekBar.setProgress((defaultMedTime * 60) - 60);
+        seekBar.setMax(isHardcoreMode ? 119 : 59);
+        seekBar.setProgress((defaultMedTime));
 
         msToMed = defaultMedTime * 60 * 1000; //default starting value
         updateTimeNoSeconds(defaultMedTime);
@@ -200,12 +201,11 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.i("seekbar: ", progress + "");
-                progress = progress + 60;
+                progress = progress + 1;
 
                 if (!timerActive) {
 
-                    updateTimeNoSeconds(progress / 60);
+                    updateTimeNoSeconds(progress);
                 }
             }
 
@@ -313,19 +313,21 @@ public class MainActivity extends AppCompatActivity {
         Uri alarmSound = Uri.parse("android.resource://com.clay.meditation/" + R.raw.bell2);
 
         try {
-            if(!mediaPlayer.isPlaying()){
-                mediaPlayer.setDataSource(getApplicationContext(), alarmSound);
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        stopSound();
-                    }
-                });
+            if (mediaPlayer.isPlaying()) {
+                stopSound();
             }
-        } catch (IOException ignored) {}
+            mediaPlayer.setDataSource(getApplicationContext(), alarmSound);
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopSound();
+                }
+            });
+        } catch (IOException ignored) {
+        }
 
     }
 
