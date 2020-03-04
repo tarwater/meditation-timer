@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 
 import java.io.IOException;
@@ -13,13 +12,9 @@ import java.util.Calendar;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,7 +22,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -48,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     long millisecondsLeft;
 
-    MediaPlayer mp;
+    MediaPlayer mediaPlayer;
     AudioManager mAudioManager;
     int userVolume;
 
@@ -61,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             startButton.setVisibility(View.INVISIBLE);
             resetButton.setVisibility(View.VISIBLE);
             pauseButton.setVisibility(View.VISIBLE);
+            playSound();
         }
     }
 
@@ -169,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         settings = this.getSharedPreferences("com.clay.meditation", Context.MODE_PRIVATE);
+        boolean isHardcoreMode = settings.getBoolean("hardcore", false);
 
         int defaultMedTime = settings.getInt("defaultMedTime", 10);
 
@@ -179,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         userVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        Log.i("volume:" , userVolume + "");
-        mp = new MediaPlayer();
+        mediaPlayer = new MediaPlayer();
 
         Typeface quicksand = Typeface.createFromAsset(getAssets(), "fonts/quicksand.ttf");
 
@@ -205,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                Log.i("seekbar: ", progress + "");
                 progress = progress + 60;
 
                 if (!timerActive) {
@@ -318,12 +313,12 @@ public class MainActivity extends AppCompatActivity {
         Uri alarmSound = Uri.parse("android.resource://com.clay.meditation/" + R.raw.bell2);
 
         try {
-            if(!mp.isPlaying()){
-                mp.setDataSource(getApplicationContext(), alarmSound);
-                mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mp.prepare();
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            if(!mediaPlayer.isPlaying()){
+                mediaPlayer.setDataSource(getApplicationContext(), alarmSound);
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         stopSound();
@@ -335,8 +330,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stopSound(){
-        mp.stop();
-        mp.reset();
+        mediaPlayer.stop();
+        mediaPlayer.reset();
     }
 
 

@@ -28,14 +28,24 @@ public class Settings extends AppCompatActivity {
         final SharedPreferences settings = this.getSharedPreferences("com.clay.meditation", Context.MODE_PRIVATE);
 
         boolean notificationsOn = settings.getBoolean("notifications", true);
+        boolean isHardcoreMode = settings.getBoolean("hardcore", false);
 
         Switch mySwitch = (Switch) findViewById(R.id.switch1);
+        Switch hardcoreSwitch = findViewById(R.id.hardcoreSwitch);
 
         mySwitch.setChecked(notificationsOn);
+        hardcoreSwitch.setChecked(isHardcoreMode);
 
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 settings.edit().putBoolean("notifications", isChecked).apply();
+            }
+        });
+
+        hardcoreSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                settings.edit().putBoolean("hardcore", isChecked).apply();
             }
         });
 

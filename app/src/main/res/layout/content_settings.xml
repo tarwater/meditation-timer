@@ -16,26 +16,54 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:text="Default session length: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/defaultLengthLabel"
-            android:textSize="18sp"
-            android:layout_row="0"
-            android:layout_column="0" />
+        android:layout_alignParentTop="true">
 
         <Spinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
             android:layout_row="0"
+            android:layout_column="1" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
             android:layout_column="1"
-             />
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="50px" />
+
+        <Switch
+            android:id="@+id/hardcoreSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="50px"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/defaultLengthLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:text="Default session length: "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginTop="50px"
+            android:text="@string/hardcoreMode"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/notificationToggleLabel"
@@ -46,14 +74,6 @@
             android:layout_marginTop="50px"
             android:text="@string/notificationToggleLabel"
             android:textSize="18sp" />
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_marginTop="50px" />
 
     </GridLayout>
 
